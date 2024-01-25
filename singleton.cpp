@@ -24,16 +24,22 @@ class square: public shape{
 };
 
 
-class shapefactory{
-    static shapefactory *instance;
-    shapefactory* shapefactory::instance=nullptr;
+class shapefactory{  
 
+static shapefactory *instance;
     shapefactory(){}
 public:
+ 
     
     static shapefactory* getinstance()
     {
-      return instance;  
+        if(instance==nullptr) {
+           instance=new shapefactory();
+        }
+
+        return instance;
+
+
     }
 
     shape* getshape(string shapetype)
@@ -50,3 +56,18 @@ public:
       else return nullptr;
     }
 };
+
+shapefactory* shapefactory::instance=nullptr;
+
+int main()
+{
+   
+   shapefactory* shapefactory1 = shapefactory::getinstance();
+
+    shape *shape1 = shapefactory1->getshape("rectangle");
+    shape1->draw();
+
+    shape *shape2 = shapefactory1->getshape("square");
+    shape2->draw();
+
+}
