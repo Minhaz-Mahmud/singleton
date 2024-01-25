@@ -22,3 +22,31 @@ class square: public shape{
         cout<<"inside square"<<endl;
     }
 };
+
+
+class shapefactory{
+    static shapefactory *instance;
+    shapefactory* shapefactory::instance=nullptr;
+
+    shapefactory(){}
+public:
+    
+    static shapefactory* getinstance()
+    {
+      return instance;  
+    }
+
+    shape* getshape(string shapetype)
+    {
+
+      if(shapetype=="rectangle")
+      {
+          return new rectangle();
+      }
+      else if(shapetype=="square")
+      {
+          return new square();
+      }
+      else return nullptr;
+    }
+};
